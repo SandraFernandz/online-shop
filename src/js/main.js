@@ -2,6 +2,13 @@
 
 console.log('>> Ready :)');
 
-const cards = document.querySelector('.js-cards');
+const cardsElement = document.querySelector('.js-cards');
 
-cards.innerHTML = 'foo';
+function getProductHtmlCode() {
+  const htmlCode = '<p>Camiseta 1</p>';
+  return htmlCode;
+}
+
+const htmlCode = getProductHtmlCode();
+
+cardsElement.innerHTML = htmlCode;
