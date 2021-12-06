@@ -5,3 +5,8 @@ body {
   background-color: $color-bg;
   font-family: $font-main;
 }
+.table .card__btn {
+  display: inline;
+  margin: 0;
+  padding: 0.1rem 0.4rem;
+}
