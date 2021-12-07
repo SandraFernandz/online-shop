@@ -4,6 +4,8 @@ console.log('>> Ready :)');
 
 const cardsElement = document.querySelector('.js-cards');
 
+// función que genera camisetas dinámicamente y usando parámetros para personalizar cada card
+
 function getProductHtmlCode(name, price, imageUrl) {
   console.log(name, price);
   console.log(price, name);
@@ -16,10 +18,28 @@ function getProductHtmlCode(name, price, imageUrl) {
   return htmlCode;
 }
 
-const htmlCode = getProductHtmlCode(
-  'Node JS',
-  '13,20',
-  `./assets/images/node-js.jpg`
-);
+// función pintar tarjetas cards
 
-cardsElement.innerHTML = htmlCode;
+function paintProducts() {
+  const product1 = getProductHtmlCode(
+    'Node JS',
+    '13,20',
+    `./assets/images/node-js.jpg`
+  );
+
+  const product2 = getProductHtmlCode(
+    'JavaScript',
+    '13,50',
+    `./assets/images/javascript.jpg`
+  );
+
+  const product3 = getProductHtmlCode(
+    'JavaScript',
+    '13,50',
+    `./assets/images/react.jpg`
+  );
+
+  cardsElement.innerHTML = product1 + product2 + product3;
+}
+
+paintProducts();
