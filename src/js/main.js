@@ -1,5 +1,7 @@
 'use strict';
 
+const { name } = require('browser-sync');
+
 console.log('>> Ready :)');
 // data
 
@@ -59,3 +61,19 @@ function paintProducts() {
 }
 
 paintProducts();
+
+// function that generates shopping cart
+
+function getCartItemHtmlCode(name, price, quantity) {
+  let htmlCode = `<tr>`;
+  htmlCode += `<td>${name}</td>`;
+  htmlCode += `<td>${price}</td>`;
+  htmlCode += `<td>`;
+  htmlCode += `<button class="card__btn">-</button>`;
+  htmlCode += `${quantity}`;
+  htmlCode += `<button class="card__btn">+</button>`;
+  htmlCode += ` </td>`;
+  htmlCode += ` <td class="text-align-right">${price * quantity}</td>`;
+  htmlCode += ` </tr>`;
+  return htmlCode;
+}
