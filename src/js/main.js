@@ -20,7 +20,7 @@ const product3ImageUrl = './assets/images/react.jpg';
 let product3Quantity = 1;
 
 // bring elements from HTML to JS
-const cardsElement = document.querySelector('.js-cards');
+const cardsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
 
 // función que genera camisetas dinámicamente y usando parámetros para personalizar cada card
