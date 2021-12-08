@@ -70,9 +70,9 @@ function getCartItemHtmlCode(name, price, quantity) {
   htmlCode += `<td>${name}</td>`;
   htmlCode += `<td>${price}</td>`;
   htmlCode += `<td>`;
-  htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
+  htmlCode += `<button class="card__btn">-</button>`;
   htmlCode += `${quantity}`;
-  htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
+  htmlCode += `<button class="card__btn">+</button>`;
   htmlCode += ` </td>`;
   htmlCode += ` <td class="text-align-right">${price * quantity}</td>`;
   htmlCode += ` </tr>`;
@@ -122,8 +122,18 @@ paintCartItems();
 
 // listen to button event
 
-const decBtn = document.querySelector('.js-btn');
+const incBtn = document.querySelector('.js-inc-btn');
+const decBtn = document.querySelector('.js-dec-btn');
 
-decBtn.addEventListener('click', function () {
-  console.log('7');
-});
+function handleDecButton(ev) {
+  const currentTarget = ev.currentTarget;
+  if (currentTarget.classList.contains('js-inc-btn')) {
+    product1Quantity += 1;
+  } else if (product1Quantity > 0) {
+    product1Quantity -= 1;
+  }
+  paintCartItems();
+}
+
+incBtn.addEventListener('click', handleDecButton);
+decBtn.addEventListener('click', handleDecButton);
