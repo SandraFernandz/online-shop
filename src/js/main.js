@@ -20,14 +20,14 @@ const product3ImageUrl = './assets/images/react.jpg';
 let product3Quantity = 1;
 
 // bring elements from HTML to JS
-const cardsElement = document.querySelector('.js-products');
+const productsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
-const fakeBtn = document.querySelector('.js-fake-btn');
 
 // función que genera camisetas dinámicamente y usando parámetros para personalizar cada card
 
 function getProductHtmlCode(name, price, imageUrl) {
-  let htmlCode = `<article class="card">`;
+  let htmlCode = '';
+  htmlCode += `<article class="card">`;
   htmlCode += `<img src= ${imageUrl} class="card__img" alt="Camiseta de ${name}">`;
   htmlCode += `<h3 class="card__title">${name}</h3>`;
   htmlCode += `<p class="card__description">${price} €</p>`;
@@ -57,7 +57,7 @@ function paintProducts() {
     product3ImageUrl
   );
 
-  cardsElement.innerHTML = product1 + product2 + product3;
+  productsElement.innerHTML = product1 + product2 + product3;
 }
 
 paintProducts();
@@ -65,13 +65,14 @@ paintProducts();
 // function that generates shopping cart
 
 function getCartItemHtmlCode(name, price, quantity) {
-  let htmlCode = `<tr>`;
+  let htmlCode = '';
+  htmlCode += `<tr>`;
   htmlCode += `<td>${name}</td>`;
   htmlCode += `<td>${price}</td>`;
   htmlCode += `<td>`;
-  htmlCode += `<button class="card__btn">-</button>`;
+  htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
   htmlCode += `${quantity}`;
-  htmlCode += `<button class="card__btn">+</button>`;
+  htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
   htmlCode += ` </td>`;
   htmlCode += ` <td class="text-align-right">${price * quantity}</td>`;
   htmlCode += ` </tr>`;
@@ -121,9 +122,8 @@ paintCartItems();
 
 // listen to button event
 
-function handleFakeBtn() {
-  product1Quantity += 1;
-  paintCartItems();
-}
+const decBtn = document.querySelector('.js-btn');
 
-fakeBtn.addEventListener('click', handleFakeBtn);
+decBtn.addEventListener('click', function () {
+  console.log('7');
+});
