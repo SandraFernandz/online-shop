@@ -1,24 +1,23 @@
 'use strict';
 
-const { name } = require('browser-sync');
-
 console.log('>> Ready :)');
+
 // data
 
 const product1Name = 'Node JS';
 const product1Price = '12,50';
 const product1ImageUrl = './assets/images/node-js.jpg';
-//let product1Quantity = 1;
+let product1Quantity = 1;
 
 const product2Name = 'JavaScript';
 const product2Price = '13,10';
 const product2ImageUrl = './assets/images/javascript.jpg';
-//let product2Quantity = 1;
+let product2Quantity = 1;
 
 const product3Name = 'React';
 const product3Price = '13,20';
 const product3ImageUrl = './assets/images/react.jpg';
-//let product3Quantity = 1;
+let product3Quantity = 1;
 
 // bring elements from HTML to JS
 const cardsElement = document.querySelector('.js-cards');
@@ -77,3 +76,44 @@ function getCartItemHtmlCode(name, price, quantity) {
   htmlCode += ` </tr>`;
   return htmlCode;
 }
+
+// function that calculates total sum (itemprice * quantity)
+
+function getCartTotalHtmlCode(totalPrice) {
+  let htmlCode = '';
+  htmlCode += ` <tr class="text--bold">`;
+  htmlCode += `  <td>Total</td>`;
+  htmlCode += `  <td colspan="3" class="text-align-right">
+        ${totalPrice}</td>`;
+  htmlCode += `</tr>`;
+  return htmlCode;
+}
+
+// function that paints all cartItems and calculates totalprice
+
+function paintCartItems() {
+  cartElement.innerHTML = '';
+  const totalPrice =
+    product1Price * product1Quantity +
+    product2Price * product2Quantity +
+    product3Price * product3Quantity;
+  const item1 = getCartItemHtmlCode(
+    product1Name,
+    product1Price,
+    product1Quantity
+  );
+  const item2 = getCartItemHtmlCode(
+    product2Name,
+    product2Price,
+    product2Quantity
+  );
+  const item3 = getCartItemHtmlCode(
+    product3Name,
+    product3Price,
+    product3Quantity
+  );
+  const total = getCartTotalHtmlCode(totalPrice);
+  cartElement.innerHTML = item1 + item2 + item3 + total;
+}
+
+paintCartItems();
