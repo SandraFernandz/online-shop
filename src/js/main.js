@@ -5,23 +5,24 @@ console.log('>> Ready :)');
 // data
 
 const product1Name = 'Node JS';
-const product1Price = '12,50';
+const product1Price = 12;
 const product1ImageUrl = './assets/images/node-js.jpg';
 let product1Quantity = 1;
 
 const product2Name = 'JavaScript';
-const product2Price = '13,10';
+const product2Price = 13;
 const product2ImageUrl = './assets/images/javascript.jpg';
 let product2Quantity = 1;
 
 const product3Name = 'React';
-const product3Price = '13,20';
+const product3Price = 13;
 const product3ImageUrl = './assets/images/react.jpg';
 let product3Quantity = 1;
 
 // bring elements from HTML to JS
 const cardsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
+const fakeBtn = document.querySelector('.js-fake-btn');
 
 // función que genera camisetas dinámicamente y usando parámetros para personalizar cada card
 
@@ -117,3 +118,12 @@ function paintCartItems() {
 }
 
 paintCartItems();
+
+// listen to button event
+
+function handleFakeBtn() {
+  product1Quantity += 1;
+  paintCartItems();
+}
+
+fakeBtn.addEventListener('click', handleFakeBtn);
