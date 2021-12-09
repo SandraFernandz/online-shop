@@ -70,9 +70,9 @@ function getCartItemHtmlCode(name, price, quantity) {
   htmlCode += `<td>${name}</td>`;
   htmlCode += `<td>${price}</td>`;
   htmlCode += `<td>`;
-  htmlCode += `<button class="card__btn">-</button>`;
+  htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
   htmlCode += `${quantity}`;
-  htmlCode += `<button class="card__btn">+</button>`;
+  htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
   htmlCode += ` </td>`;
   htmlCode += ` <td class="text-align-right">${price * quantity}</td>`;
   htmlCode += ` </tr>`;
