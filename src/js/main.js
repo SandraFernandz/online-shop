@@ -20,6 +20,7 @@ const product3ImageUrl = './assets/images/react.jpg';
 let product3Quantity = 1;
 
 // bring elements from HTML to JS
+
 const productsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
 
@@ -116,14 +117,14 @@ function paintCartItems() {
   );
   const total = getCartTotalHtmlCode(totalPrice);
   cartElement.innerHTML = item1 + item2 + item3 + total;
+  // after re-painting, we listen w/ addEventListener again
+  listenCartBtns();
 }
 
 paintCartItems();
 
 // listen to button event
-
-const incBtn = document.querySelector('.js-inc-btn');
-const decBtn = document.querySelector('.js-dec-btn');
+// when moved, these buttons don´t work because they haven´t been painted yet??
 
 function handleDecButton(ev) {
   const currentTarget = ev.currentTarget;
@@ -135,5 +136,9 @@ function handleDecButton(ev) {
   paintCartItems();
 }
 
-incBtn.addEventListener('click', handleDecButton);
-decBtn.addEventListener('click', handleDecButton);
+function listenCartBtns() {
+  const decBtn = document.querySelector('.js-dec-btn');
+  const incBtn = document.querySelector('.js-inc-btn');
+  incBtn.addEventListener('click', handleDecButton);
+  decBtn.addEventListener('click', handleDecButton);
+}
