@@ -4,6 +4,27 @@ console.log('>> Ready :)');
 
 // data
 
+const product1 = {
+  name: 'Node JS',
+  price: 12,
+  imageUrl: './assets/images/node-js.jpg',
+  quantity: 1,
+};
+
+const product2 = {
+  name: 'JavaScript',
+  price: 15,
+  imageUrl: './assets/images/javascript.jpg',
+  quantity: 1,
+};
+
+const product3 = {
+  name: 'React JS',
+  price: 13,
+  imageUrl: './assets/images/react.jpg',
+  quantity: 1,
+};
+
 const product1Name = 'Node JS';
 const product1Price = 12;
 const product1ImageUrl = './assets/images/node-js.jpg';
@@ -24,63 +45,54 @@ let product3Quantity = 1;
 const productsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
 
-// función que genera camisetas dinámicamente y usando parámetros para personalizar cada card
+// 1- función que genera camisetas dinámicamente usando parámetros para personalizar cada card
+// 7 - using object as paramater instead of multiple parameters (price, name, image)
 
-function getProductHtmlCode(name, price, imageUrl) {
+function getProductHtmlCode(product) {
   let htmlCode = '';
   htmlCode += `<article class="card">`;
-  htmlCode += `<img src= ${imageUrl} class="card__img" alt="Camiseta de ${name}">`;
-  htmlCode += `<h3 class="card__title">${name}</h3>`;
-  htmlCode += `<p class="card__description">${price} €</p>`;
+  htmlCode += `<img src= ${product.imageUrl} class="card__img" alt="Camiseta de ${product.name}">`;
+  htmlCode += `<h3 class="card__title">${product.name}</h3>`;
+  htmlCode += `<p class="card__description">${product.price} €</p>`;
   htmlCode += `<button class="card__btn">Añadir a la cesta</button>`;
   htmlCode += `</article>`;
   return htmlCode;
 }
 
-// función pintar tarjetas cards
+// 2- función pintar tarjetas cards
+// 8- using object
 
 function paintProducts() {
-  const product1 = getProductHtmlCode(
-    product1Name,
-    product1Price,
-    product1ImageUrl
-  );
+  const _product1 = getProductHtmlCode(product1);
+  const _product2 = getProductHtmlCode(product2);
+  const _product3 = getProductHtmlCode(product3);
 
-  const product2 = getProductHtmlCode(
-    product2Name,
-    product2Price,
-    product2ImageUrl
-  );
-
-  const product3 = getProductHtmlCode(
-    product3Name,
-    product3Price,
-    product3ImageUrl
-  );
-
-  productsElement.innerHTML = product1 + product2 + product3;
+  productsElement.innerHTML = _product1 + _product2 + _product3;
 }
 
 paintProducts();
 
-// function that generates shopping cart
+// 3- function that generates each item´s row in shopping cart
+// 9- converting items into objects
 
-function getCartItemHtmlCode(name, price, quantity) {
+function getCartItemHtmlCode(product) {
   let htmlCode = '';
   htmlCode += `<tr>`;
-  htmlCode += `<td>${name}</td>`;
-  htmlCode += `<td>${price}</td>`;
+  htmlCode += `<td>${product.name}</td>`;
+  htmlCode += `<td>${product.price}</td>`;
   htmlCode += `<td>`;
   htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
-  htmlCode += `${quantity}`;
+  htmlCode += `${product.quantity}`;
   htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
   htmlCode += ` </td>`;
-  htmlCode += ` <td class="text-align-right">${price * quantity}</td>`;
+  htmlCode += ` <td class="text-align-right">${
+    product.price * product.quantity
+  }</td>`;
   htmlCode += ` </tr>`;
   return htmlCode;
 }
 
-// function that calculates total sum (itemprice * quantity)
+// 4- function that generates and calculates total sum (itemprice * quantity) in shopping cart
 
 function getCartTotalHtmlCode(totalPrice) {
   let htmlCode = '';
@@ -92,29 +104,18 @@ function getCartTotalHtmlCode(totalPrice) {
   return htmlCode;
 }
 
-// function that paints all cartItems and calculates totalprice
+// 5- function that paints all cartItems and calculates totalprice
+// 8- transfer items with properties to object
 
 function paintCartItems() {
   cartElement.innerHTML = '';
   const totalPrice =
-    product1Price * product1Quantity +
-    product2Price * product2Quantity +
-    product3Price * product3Quantity;
-  const item1 = getCartItemHtmlCode(
-    product1Name,
-    product1Price,
-    product1Quantity
-  );
-  const item2 = getCartItemHtmlCode(
-    product2Name,
-    product2Price,
-    product2Quantity
-  );
-  const item3 = getCartItemHtmlCode(
-    product3Name,
-    product3Price,
-    product3Quantity
-  );
+    product1.price * product1.quantity +
+    product2.price * product2.quantity +
+    product3.price * product3.quantity;
+  const item1 = getCartItemHtmlCode(product1);
+  const item2 = getCartItemHtmlCode(product2);
+  const item3 = getCartItemHtmlCode(product3);
   const total = getCartTotalHtmlCode(totalPrice);
   cartElement.innerHTML = item1 + item2 + item3 + total;
   // after re-painting, we listen w/ addEventListener again
@@ -123,7 +124,7 @@ function paintCartItems() {
 
 paintCartItems();
 
-// listen to button event
+// 6- listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
 
 function handleDecButton(ev) {
