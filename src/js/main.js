@@ -25,20 +25,20 @@ const product3 = {
   quantity: 1,
 };
 
-const product1Name = 'Node JS';
-const product1Price = 12;
-const product1ImageUrl = './assets/images/node-js.jpg';
-let product1Quantity = 1;
+// const product1Name = 'Node JS';
+// const product1Price = 12;
+// const product1ImageUrl = './assets/images/node-js.jpg';
+// let product1Quantity = 1;
 
-const product2Name = 'JavaScript';
-const product2Price = 13;
-const product2ImageUrl = './assets/images/javascript.jpg';
-let product2Quantity = 1;
+// const product2Name = 'JavaScript';
+// const product2Price = 13;
+// const product2ImageUrl = './assets/images/javascript.jpg';
+// let product2Quantity = 1;
 
-const product3Name = 'React';
-const product3Price = 13;
-const product3ImageUrl = './assets/images/react.jpg';
-let product3Quantity = 1;
+// const product3Name = 'React';
+// const product3Price = 13;
+// const product3ImageUrl = './assets/images/react.jpg';
+// let product3Quantity = 1;
 
 // bring elements from HTML to JS
 
@@ -127,12 +127,12 @@ paintCartItems();
 // 6- listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
 
-function handleDecButton(ev) {
+function handleQuantityBtn(ev) {
   const currentTarget = ev.currentTarget;
   if (currentTarget.classList.contains('js-inc-btn')) {
-    product1Quantity += 1;
-  } else if (product1Quantity > 0) {
-    product1Quantity -= 1;
+    product1.quantity += 1;
+  } else if (product1.quantity > 0) {
+    product1.quantity -= 1;
   }
   paintCartItems();
 }
@@ -140,6 +140,6 @@ function handleDecButton(ev) {
 function listenCartBtns() {
   const decBtn = document.querySelector('.js-dec-btn');
   const incBtn = document.querySelector('.js-inc-btn');
-  incBtn.addEventListener('click', handleDecButton);
-  decBtn.addEventListener('click', handleDecButton);
+  incBtn.addEventListener('click', handleQuantityBtn);
+  decBtn.addEventListener('click', handleQuantityBtn);
 }
