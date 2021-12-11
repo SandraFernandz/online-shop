@@ -143,3 +143,17 @@ function listenCartBtns() {
   incBtn.addEventListener('click', handleQuantityBtn);
   decBtn.addEventListener('click', handleQuantityBtn);
 }
+
+// 9 - creating object with form input
+
+const address = document.querySelector('.js-address');
+const city = document.querySelector('.js-city');
+const zip = document.querySelector('.js-zip');
+
+function handleAddress() {
+  console.log('Dirección');
+}
+
+address.addEventListener('keyup', handleAddress);
+city.addEventListener('keyup', handleAddress);
+zip.addEventListener('keyup', handleAddress);
