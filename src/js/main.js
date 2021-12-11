@@ -9,6 +9,7 @@ const product1 = {
   price: 12,
   imageUrl: './assets/images/node-js.jpg',
   quantity: 1,
+  incQuantity: incQuantityFunction,
   decQuantity: decQuantityFunction,
 };
 
@@ -17,6 +18,7 @@ const product2 = {
   price: 15,
   imageUrl: './assets/images/javascript.jpg',
   quantity: 1,
+  incQuantity: incQuantityFunction,
   decQuantity: decQuantityFunction,
 };
 
@@ -25,6 +27,7 @@ const product3 = {
   price: 13,
   imageUrl: './assets/images/react.jpg',
   quantity: 1,
+  incQuantity: incQuantityFunction,
   decQuantity: decQuantityFunction,
 };
 
@@ -133,7 +136,8 @@ paintCartItems();
 function handleQuantityBtn(ev) {
   const currentTarget = ev.currentTarget;
   if (currentTarget.classList.contains('js-inc-btn')) {
-    product1.quantity += 1;
+    product1.incQuantity();
+    //product1.quantity += 1;
   } else {
     product1.decQuantity();
     //product1.quantity -= 1;
@@ -141,7 +145,11 @@ function handleQuantityBtn(ev) {
   paintCartItems();
 }
 
-// 10 - using "this" for a function being used from an object, where "this" is the object
+// 10 - using "this" for a function being used from an object, where "this" is the object.
+
+function incQuantityFunction() {
+  this.quantity += 1;
+}
 
 function decQuantityFunction() {
   if (this.quantity > 0) {
@@ -168,6 +176,13 @@ function handleAddress(ev) {
   const name = ev.currentTarget.name;
   userAddress[name] = ev.currentTarget.value;
   console.log('Dirección', userAddress);
+  paintAddress();
+}
+
+function paintAddress() {
+  document.querySelector('.js-address-info').innerHTML = `${
+    userAddress.address || ''
+  } ${userAddress.city || ''} ${userAddress.zip || ''}`;
 }
 
 address.addEventListener('keyup', handleAddress);
