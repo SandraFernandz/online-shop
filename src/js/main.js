@@ -146,12 +146,16 @@ function listenCartBtns() {
 
 // 9 - creating object with form input
 
+const userAddress = {};
+
 const address = document.querySelector('.js-address');
 const city = document.querySelector('.js-city');
 const zip = document.querySelector('.js-zip');
 
-function handleAddress() {
-  console.log('Dirección');
+function handleAddress(ev) {
+  const name = ev.currentTarget.name;
+  userAddress[name] = ev.currentTarget.value;
+  console.log('Dirección', userAddress);
 }
 
 address.addEventListener('keyup', handleAddress);
