@@ -4,32 +4,36 @@ console.log('>> Ready :)');
 
 // data
 
-const product1 = {
-  name: 'Node JS',
-  price: 12,
-  imageUrl: './assets/images/node-js.jpg',
-  quantity: 1,
-  incQuantity: incQuantityFunction,
-  decQuantity: decQuantityFunction,
-};
+// const product1 = ;
+// const product2 = ;
+// const product3 = ;
 
-const product2 = {
-  name: 'JavaScript',
-  price: 15,
-  imageUrl: './assets/images/javascript.jpg',
-  quantity: 1,
-  incQuantity: incQuantityFunction,
-  decQuantity: decQuantityFunction,
-};
-
-const product3 = {
-  name: 'React JS',
-  price: 13,
-  imageUrl: './assets/images/react.jpg',
-  quantity: 1,
-  incQuantity: incQuantityFunction,
-  decQuantity: decQuantityFunction,
-};
+const products = [
+  {
+    name: 'Node JS',
+    price: 12,
+    imageUrl: './assets/images/node-js.jpg',
+    quantity: 1,
+    incQuantity: incQuantityFunction,
+    decQuantity: decQuantityFunction,
+  },
+  {
+    name: 'JavaScript',
+    price: 15,
+    imageUrl: './assets/images/javascript.jpg',
+    quantity: 1,
+    incQuantity: incQuantityFunction,
+    decQuantity: decQuantityFunction,
+  },
+  {
+    name: 'React JS',
+    price: 13,
+    imageUrl: './assets/images/react.jpg',
+    quantity: 1,
+    incQuantity: incQuantityFunction,
+    decQuantity: decQuantityFunction,
+  },
+];
 
 // const product1Name = 'Node JS';
 // const product1Price = 12;
@@ -69,11 +73,18 @@ function getProductHtmlCode(product) {
 // 8- using object
 
 function paintProducts() {
-  const _product1 = getProductHtmlCode(product1);
-  const _product2 = getProductHtmlCode(product2);
-  const _product3 = getProductHtmlCode(product3);
+  // 11- iteramos con for of (ppio a fin)
+  let productsCode = '';
+  for (const product of products) {
+    productsCode += getProductHtmlCode(product);
+    console.log(product);
+  }
+  productsElement.innerHTML = productsCode;
+  // const _product1 = getProductHtmlCode(product1);
+  // const _product2 = getProductHtmlCode(product2);
+  // const _product3 = getProductHtmlCode(product3);
 
-  productsElement.innerHTML = _product1 + _product2 + _product3;
+  // productsElement.innerHTML = _product1 + _product2 + _product3;
 }
 
 paintProducts();
@@ -115,17 +126,20 @@ function getCartTotalHtmlCode(totalPrice) {
 
 function paintCartItems() {
   cartElement.innerHTML = '';
-  const totalPrice =
-    product1.price * product1.quantity +
-    product2.price * product2.quantity +
-    product3.price * product3.quantity;
-  const item1 = getCartItemHtmlCode(product1);
-  const item2 = getCartItemHtmlCode(product2);
-  const item3 = getCartItemHtmlCode(product3);
-  const total = getCartTotalHtmlCode(totalPrice);
-  cartElement.innerHTML = item1 + item2 + item3 + total;
-  // after re-painting, we listen w/ addEventListener again
-  listenCartBtns();
+  for (let index = 0; index < products.length; index++) {
+    cartElement.innerHTML += getCartItemHtmlCode(products[index]);
+  }
+  // const totalPrice =
+  //   product1.price * product1.quantity +
+  //   product2.price * product2.quantity +
+  //   product3.price * product3.quantity;
+  // const item1 = getCartItemHtmlCode(product1);
+  // const item2 = getCartItemHtmlCode(product2);
+  // const item3 = getCartItemHtmlCode(product3);
+  // const total = getCartTotalHtmlCode(totalPrice);
+  // cartElement.innerHTML = item1 + item2 + item3 + total;
+  // // after re-painting, we listen w/ addEventListener again
+  // listenCartBtns();
 }
 
 paintCartItems();
