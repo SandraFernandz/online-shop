@@ -14,24 +14,24 @@ const products = [
     price: 12,
     imageUrl: './assets/images/node-js.jpg',
     quantity: 1,
-    incQuantity: incQuantityFunction,
-    decQuantity: decQuantityFunction,
+    incQuantity: incQuantity,
+    decQuantity: decQuantity,
   },
   {
     name: 'JavaScript',
     price: 15,
     imageUrl: './assets/images/javascript.jpg',
     quantity: 1,
-    incQuantity: incQuantityFunction,
-    decQuantity: decQuantityFunction,
+    incQuantity: incQuantity,
+    decQuantity: decQuantity,
   },
   {
     name: 'React JS',
     price: 13,
     imageUrl: './assets/images/react.jpg',
     quantity: 1,
-    incQuantity: incQuantityFunction,
-    decQuantity: decQuantityFunction,
+    incQuantity: incQuantity,
+    decQuantity: decQuantity,
   },
 ];
 
@@ -77,7 +77,6 @@ function paintProducts() {
   let productsCode = '';
   for (const product of products) {
     productsCode += getProductHtmlCode(product);
-    console.log(product);
   }
   productsElement.innerHTML = productsCode;
   // const _product1 = getProductHtmlCode(product1);
@@ -116,7 +115,7 @@ function getCartTotalHtmlCode(totalPrice) {
   htmlCode += ` <tr class="text--bold">`;
   htmlCode += `  <td>Total</td>`;
   htmlCode += `  <td colspan="3" class="text-align-right">
-        ${totalPrice}</td>`;
+        ${getTotalPrice}</td>`;
   htmlCode += `</tr>`;
   return htmlCode;
 }
@@ -129,6 +128,8 @@ function paintCartItems() {
   for (let index = 0; index < products.length; index++) {
     cartElement.innerHTML += getCartItemHtmlCode(products[index]);
   }
+  cartElement.innerHTML += getCartTotalHtmlCode();
+  listenCartBtns();
   // const totalPrice =
   //   product1.price * product1.quantity +
   //   product2.price * product2.quantity +
@@ -142,6 +143,14 @@ function paintCartItems() {
   // listenCartBtns();
 }
 
+function getTotalPrice() {
+  let total = 0;
+  for (const product of products) {
+    total += product.price * product.quantity;
+  }
+  return total;
+}
+
 paintCartItems();
 
 // 6- listen to button event
@@ -150,10 +159,10 @@ paintCartItems();
 function handleQuantityBtn(ev) {
   const currentTarget = ev.currentTarget;
   if (currentTarget.classList.contains('js-inc-btn')) {
-    product1.incQuantity();
+    products[0].incQuantity();
     //product1.quantity += 1;
-  } else {
-    product1.decQuantity();
+  } else if (currentTarget.classList.contains('js-dec-btn')) {
+    products[0].decQuantity();
     //product1.quantity -= 1;
   }
   paintCartItems();
@@ -161,11 +170,11 @@ function handleQuantityBtn(ev) {
 
 // 10 - using "this" for a function being used from an object, where "this" is the object.
 
-function incQuantityFunction() {
+function incQuantity() {
   this.quantity += 1;
 }
 
-function decQuantityFunction() {
+function decQuantity() {
   if (this.quantity > 0) {
     this.quantity -= 1;
   }
