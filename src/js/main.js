@@ -14,24 +14,18 @@ const products = [
     price: 12,
     imageUrl: './assets/images/node-js.jpg',
     quantity: 1,
-    incQuantity: incQuantity,
-    decQuantity: decQuantity,
   },
   {
     name: 'JavaScript',
     price: 15,
     imageUrl: './assets/images/javascript.jpg',
     quantity: 1,
-    incQuantity: incQuantity,
-    decQuantity: decQuantity,
   },
   {
     name: 'React JS',
     price: 13,
     imageUrl: './assets/images/react.jpg',
     quantity: 1,
-    incQuantity: incQuantity,
-    decQuantity: decQuantity,
   },
 ];
 
@@ -110,12 +104,12 @@ function getCartItemHtmlCode(product) {
 
 // 4- function that generates and calculates total sum (itemprice * quantity) in shopping cart
 
-function getCartTotalHtmlCode(totalPrice) {
+function getCartTotalHtmlCode() {
   let htmlCode = '';
   htmlCode += ` <tr class="text--bold">`;
   htmlCode += `  <td>Total</td>`;
   htmlCode += `  <td colspan="3" class="text-align-right">
-        ${getTotalPrice}</td>`;
+        ${getTotalPrice()}</td>`;
   htmlCode += `</tr>`;
   return htmlCode;
 }
@@ -159,24 +153,26 @@ paintCartItems();
 function handleQuantityBtn(ev) {
   const currentTarget = ev.currentTarget;
   if (currentTarget.classList.contains('js-inc-btn')) {
-    products[0].incQuantity();
+    incQuantity(products[0]);
     //product1.quantity += 1;
   } else if (currentTarget.classList.contains('js-dec-btn')) {
-    products[0].decQuantity();
+    decQuantity(products[0]);
     //product1.quantity -= 1;
   }
   paintCartItems();
 }
 
 // 10 - using "this" for a function being used from an object, where "this" is the object.
+// 13 - product functions
 
-function incQuantity() {
-  this.quantity += 1;
+function incQuantity(product) {
+  //this.quantity += 1;
+  product.quantity += 1;
 }
 
-function decQuantity() {
-  if (this.quantity > 0) {
-    this.quantity -= 1;
+function decQuantity(product) {
+  if (product.quantity > 0) {
+    product.quantity -= 1;
   }
 }
 
@@ -203,9 +199,10 @@ function handleAddress(ev) {
 }
 
 function paintAddress() {
-  document.querySelector('.js-address-info').innerHTML = `${
-    userAddress.address || ''
-  } ${userAddress.city || ''} ${userAddress.zip || ''}`;
+  const addressInfo = document.querySelector('.js-address-info');
+  addressInfo.innerHTML = `${userAddress.address || ''} ${
+    userAddress.city || ''
+  } ${userAddress.zip || ''}`;
 }
 
 address.addEventListener('keyup', handleAddress);
