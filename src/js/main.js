@@ -2,32 +2,47 @@
 
 console.log('>> Ready :)');
 
+// fetch
+
+function getApiCart() {
+  fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json');
+  // .then(function (response) {
+  //   console.log('Ya tengo los datos');
+  //   return response.json();
+  // })
+  // .then(function (data) {
+  //   console.log(data);
+  // });
+}
+
+getApiCart();
+
 // data
 
 // const product1 = ;
 // const product2 = ;
 // const product3 = ;
 
-const products = [
-  {
-    name: 'Node JS',
-    price: 12,
-    imageUrl: './assets/images/node-js.jpg',
-    quantity: 1,
-  },
-  {
-    name: 'JavaScript',
-    price: 15,
-    imageUrl: './assets/images/javascript.jpg',
-    quantity: 1,
-  },
-  {
-    name: 'React JS',
-    price: 13,
-    imageUrl: './assets/images/react.jpg',
-    quantity: 1,
-  },
-];
+// const products = [
+//   {
+//     name: 'Node JS',
+//     price: 12,
+//     imageUrl: './assets/images/node-js.jpg',
+//     quantity: 1,
+//   },
+//   {
+//     name: 'JavaScript',
+//     price: 15,
+//     imageUrl: './assets/images/javascript.jpg',
+//     quantity: 1,
+//   },
+//   {
+//     name: 'React JS',
+//     price: 13,
+//     imageUrl: './assets/images/react.jpg',
+//     quantity: 1,
+//   },
+// ];
 
 // const product1Name = 'Node JS';
 // const product1Price = 12;
@@ -80,7 +95,7 @@ function paintProducts() {
   // productsElement.innerHTML = _product1 + _product2 + _product3;
 }
 
-paintProducts();
+//paintProducts();
 
 // 3- function that generates each item´s row in shopping cart
 // 9- converting items into objects
@@ -145,7 +160,7 @@ function getTotalPrice() {
   return total;
 }
 
-paintCartItems();
+//paintCartItems();
 
 // 6- listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
