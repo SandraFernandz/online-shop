@@ -3,16 +3,22 @@
 console.log('>> Ready :)');
 
 // fetch
+// guardamos objeto resultado del fetch
+
+let products = [];
 
 function getApiCart() {
-  fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json');
-  // .then(function (response) {
-  //   console.log('Ya tengo los datos');
-  //   return response.json();
-  // })
-  // .then(function (data) {
-  //   console.log(data);
-  // });
+  fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json')
+    .then(function (response) {
+      console.log('Ya tengo los datos');
+      return response.json();
+    })
+    .then(function (data) {
+      products = data.cart.items;
+      console.log(data.cart.items);
+      paintProducts();
+      paintCartItems();
+    });
 }
 
 getApiCart();
