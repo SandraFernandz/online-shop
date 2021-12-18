@@ -8,7 +8,8 @@ console.log('>> Ready :)');
 let products = [];
 
 function getApiCart() {
-  fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json')
+  fetch('http://127.0.0.1:5500/public/api/data.json')
+    //fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json')
     .then(function (response) {
       console.log('Ya tengo los datos');
       return response.json();
