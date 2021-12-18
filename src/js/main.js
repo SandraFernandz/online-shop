@@ -23,48 +23,6 @@ function getApiCart() {
 
 getApiCart();
 
-// data
-
-// const product1 = ;
-// const product2 = ;
-// const product3 = ;
-
-// const products = [
-//   {
-//     name: 'Node JS',
-//     price: 12,
-//     imageUrl: './assets/images/node-js.jpg',
-//     quantity: 1,
-//   },
-//   {
-//     name: 'JavaScript',
-//     price: 15,
-//     imageUrl: './assets/images/javascript.jpg',
-//     quantity: 1,
-//   },
-//   {
-//     name: 'React JS',
-//     price: 13,
-//     imageUrl: './assets/images/react.jpg',
-//     quantity: 1,
-//   },
-// ];
-
-// const product1Name = 'Node JS';
-// const product1Price = 12;
-// const product1ImageUrl = './assets/images/node-js.jpg';
-// let product1Quantity = 1;
-
-// const product2Name = 'JavaScript';
-// const product2Price = 13;
-// const product2ImageUrl = './assets/images/javascript.jpg';
-// let product2Quantity = 1;
-
-// const product3Name = 'React';
-// const product3Price = 13;
-// const product3ImageUrl = './assets/images/react.jpg';
-// let product3Quantity = 1;
-
 // bring elements from HTML to JS
 
 const productsElement = document.querySelector('.js-products');
@@ -78,7 +36,7 @@ function getProductHtmlCode(product) {
   htmlCode += `<img src= ${product.imageUrl} class="card__img" alt="Camiseta de ${product.name}">`;
   htmlCode += `<h3 class="card__title">${product.name}</h3>`;
   htmlCode += `<p class="card__description">${product.price} €</p>`;
-  htmlCode += `<button class="card__btn">Añadir a la cesta</button>`;
+  htmlCode += `<button class="card__btn js_add_product">Añadir a la cesta</button>`;
   htmlCode += `</article>`;
   return htmlCode;
 }
@@ -92,14 +50,25 @@ function paintProducts() {
     productsCode += getProductHtmlCode(product);
   }
   productsElement.innerHTML = productsCode;
-  // const _product1 = getProductHtmlCode(product1);
-  // const _product2 = getProductHtmlCode(product2);
-  // const _product3 = getProductHtmlCode(product3);
-
-  // productsElement.innerHTML = _product1 + _product2 + _product3;
+  // 5- repinto botones con la clase añadida para el addEventListener
+  listenAddProductsBtns();
 }
 
-//paintProducts();
+// 4- escuchar el botón de las tarjetas de producto. Nótese que traemos elemento de html a js dentro de la función
+
+function listenAddProductsBtns() {
+  const productBtns = document.querySelectorAll('.js_add_product');
+  for (const productBtn of productBtns) {
+    productBtn.addEventListener('click', handleAddProduct);
+    console.log(productBtn);
+  }
+}
+
+// 6- creamos función manejadora del evento
+
+function handleAddProduct() {
+  console.log('me han clickado');
+}
 
 // function that generates each item´s row in shopping cart
 // converting items into objects
