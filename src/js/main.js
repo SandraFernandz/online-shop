@@ -2,14 +2,13 @@
 
 console.log('>> Ready :)');
 
-// fetch
-// guardamos objeto resultado del fetch
+// 1- fetch y guardamos objeto resultado del fetch en un objeto y así no perderlo y poder llamarlo desde cualquier lugar del prog
 
 let products = [];
 
 function getApiCart() {
-  fetch('http://127.0.0.1:5500/public/api/data.json')
-    //fetch('https://beta.adalab.es/ejercicios-extra/api/eshop/v1/cart.json')
+  // ./ estamos en misma carpeta madre, vamos a carpeta hermana
+  fetch('./api/data.json')
     .then(function (response) {
       console.log('Ya tengo los datos');
       return response.json();
@@ -71,8 +70,7 @@ getApiCart();
 const productsElement = document.querySelector('.js-products');
 const cartElement = document.querySelector('.js-cart');
 
-// 1- función que genera camisetas dinámicamente usando parámetros para personalizar cada card
-// 7 - using object as paramater instead of multiple parameters (price, name, image)
+// 3- generar html de 1 producto
 
 function getProductHtmlCode(product) {
   let htmlCode = '';
@@ -85,11 +83,10 @@ function getProductHtmlCode(product) {
   return htmlCode;
 }
 
-// 2- función pintar tarjetas cards
-// 8- using object
+// 3- función que recorre todos los productos (cards) y los pinta
 
 function paintProducts() {
-  // 11- iteramos con for of (ppio a fin)
+  // iteramos con for of (ppio a fin)
   let productsCode = '';
   for (const product of products) {
     productsCode += getProductHtmlCode(product);
@@ -104,8 +101,8 @@ function paintProducts() {
 
 //paintProducts();
 
-// 3- function that generates each item´s row in shopping cart
-// 9- converting items into objects
+// function that generates each item´s row in shopping cart
+// converting items into objects
 
 function getCartItemHtmlCode(product) {
   let htmlCode = '';
@@ -124,7 +121,7 @@ function getCartItemHtmlCode(product) {
   return htmlCode;
 }
 
-// 4- function that generates and calculates total sum (itemprice * quantity) in shopping cart
+//function that generates and calculates total sum (itemprice * quantity) in shopping cart
 
 function getCartTotalHtmlCode() {
   let htmlCode = '';
@@ -136,8 +133,8 @@ function getCartTotalHtmlCode() {
   return htmlCode;
 }
 
-// 5- function that paints all cartItems and calculates totalprice
-// 8- transfer items with properties to object
+// function that paints all cartItems and calculates totalprice
+// transfer items with properties to object
 
 function paintCartItems() {
   cartElement.innerHTML = '';
@@ -169,7 +166,7 @@ function getTotalPrice() {
 
 //paintCartItems();
 
-// 6- listen to button event
+// listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
 
 function handleQuantityBtn(ev) {
@@ -184,8 +181,8 @@ function handleQuantityBtn(ev) {
   paintCartItems();
 }
 
-// 10 - using "this" for a function being used from an object, where "this" is the object.
-// 13 - product functions
+// using "this" for a function being used from an object, where "this" is the object.
+// product functions
 
 function incQuantity(product) {
   //this.quantity += 1;
@@ -205,7 +202,7 @@ function listenCartBtns() {
   decBtn.addEventListener('click', handleQuantityBtn);
 }
 
-// 9 - creating object with form input
+// creating object with form input
 
 const userAddress = {};
 
