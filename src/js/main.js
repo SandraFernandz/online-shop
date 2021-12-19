@@ -36,7 +36,7 @@ function getProductHtmlCode(product) {
   htmlCode += `<img src= ${product.imageUrl} class="card__img" alt="Camiseta de ${product.name}">`;
   htmlCode += `<h3 class="card__title">${product.name}</h3>`;
   htmlCode += `<p class="card__description">${product.price} €</p>`;
-  // 7- añadimos id para saber cuál ha sido el target. usamos data-id para futuros pasos
+  // 7- añadimos id para saber cuál ha sido el target. usamos data-id para futuros pasos(podremos acceder a los atributos del elemento html con la propiedad ev.target.dataset del objeto, dde dataset es una propiedad por defecto)
   htmlCode += `<button class="card__btn js_add_product" 
   data-id =${product.id}>Añadir a la cesta</button>`;
   htmlCode += `</article>`;
