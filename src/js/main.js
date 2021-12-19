@@ -69,7 +69,9 @@ function listenAddProductsBtns() {
 // 6- creamos función manejadora del evento
 
 function handleAddProduct(ev) {
-  console.log('evento', ev.currentTarget, ev.target.dataset);
+  // 8- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
+  //console.log('evento', ev.currentTarget, ev.target.dataset);
+  console.log(ev.target.dataset.id);
   console.log('me han clickado');
 }
 
