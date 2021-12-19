@@ -36,7 +36,9 @@ function getProductHtmlCode(product) {
   htmlCode += `<img src= ${product.imageUrl} class="card__img" alt="Camiseta de ${product.name}">`;
   htmlCode += `<h3 class="card__title">${product.name}</h3>`;
   htmlCode += `<p class="card__description">${product.price} €</p>`;
-  htmlCode += `<button class="card__btn js_add_product">Añadir a la cesta</button>`;
+  // 7- añadimos id para saber cuál ha sido el target. usamos data-id para futuros pasos
+  htmlCode += `<button class="card__btn js_add_product" 
+  data-id =${product.id}>Añadir a la cesta</button>`;
   htmlCode += `</article>`;
   return htmlCode;
 }
@@ -66,7 +68,8 @@ function listenAddProductsBtns() {
 
 // 6- creamos función manejadora del evento
 
-function handleAddProduct() {
+function handleAddProduct(ev) {
+  console.log('evento', ev.currentTarget, ev.target.dataset);
   console.log('me han clickado');
 }
 
