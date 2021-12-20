@@ -6,22 +6,16 @@ console.log('>> Ready :)');
 
 let products = [];
 
-function getApiCart() {
+const getApiData = () => {
   // ./ estamos en misma carpeta madre, vamos a carpeta hermana
   fetch('./api/data.json')
-    .then(function (response) {
-      console.log('Ya tengo los datos');
-      return response.json();
-    })
-    .then(function (data) {
+    .then((response) => response.json())
+    .then((data) => {
       products = data.cart.items;
-      console.log(data.cart.items);
       paintProducts();
-      paintCartItems();
+      //paintCartItems();
     });
-}
-
-getApiCart();
+};
 
 // bring elements from HTML to JS
 
@@ -30,18 +24,17 @@ const cartElement = document.querySelector('.js-cart');
 
 // 3- generar html de 1 producto
 
-function getProductHtmlCode(product) {
+const getProductHtmlCode = (product) => {
   let htmlCode = '';
   htmlCode += `<article class="card">`;
-  htmlCode += `<img src= ${product.imageUrl} class="card__img" alt="Camiseta de ${product.name}">`;
+  htmlCode += `<img src= "${product.imageUrl}" class="card__img" alt="Camiseta de ${product.name}">`;
   htmlCode += `<h3 class="card__title">${product.name}</h3>`;
   htmlCode += `<p class="card__description">${product.price} €</p>`;
   // 7- añadimos id para saber cuál ha sido el target. usamos data-id para futuros pasos(podremos acceder a los atributos del elemento html con la propiedad ev.target.dataset del objeto, dde dataset es una propiedad por defecto)
-  htmlCode += `<button class="card__btn js_add_product" 
-  data-id =${product.id}>Añadir a la cesta</button>`;
+  htmlCode += `<button class="card__btn js-add-product" data-id= "${product.id}">Añadir a la cesta</button>`;
   htmlCode += `</article>`;
   return htmlCode;
-}
+};
 
 // 3- función que recorre todos los productos (cards) y los pinta
 
@@ -56,10 +49,11 @@ function paintProducts() {
   listenAddProductsBtns();
 }
 
-// 4- escuchar el botón de las tarjetas de producto. Nótese que traemos elemento de html a js dentro de la función
+// 4- escuchar el botón de las tarjetas de producto. ATT que traemos elemento de html a js dentro de la función para escuchar el evento
 
 function listenAddProductsBtns() {
-  const productBtns = document.querySelectorAll('.js_add_product');
+  const productBtns = document.querySelectorAll('.js-add-product');
+
   for (const productBtn of productBtns) {
     productBtn.addEventListener('click', handleAddProduct);
     console.log(productBtn);
@@ -70,10 +64,11 @@ function listenAddProductsBtns() {
 
 function handleAddProduct(ev) {
   // 8- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
-  //console.log('evento', ev.currentTarget, ev.target.dataset);
   console.log(ev.target.dataset.id);
   console.log('me han clickado');
 }
+
+getApiData();
 
 // function that generates each item´s row in shopping cart
 // converting items into objects
