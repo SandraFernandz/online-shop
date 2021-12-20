@@ -5,6 +5,8 @@ console.log('>> Ready :)');
 // 1- fetch y guardamos objeto resultado del fetch en un objeto y así no perderlo y poder llamarlo desde cualquier lugar del prog
 
 let products = [];
+// 8- array of chosen items
+let cart = [];
 
 const getApiData = () => {
   // ./ estamos en misma carpeta madre, vamos a carpeta hermana
@@ -63,9 +65,10 @@ function listenAddProductsBtns() {
 // 6- creamos función manejadora del evento
 
 function handleAddProduct(ev) {
-  // 8- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
-  console.log(ev.target.dataset.id);
+  // 9- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
+  console.log(products, ev.target.dataset.id);
   console.log('me han clickado');
+  cart.push([]);
 }
 
 getApiData();
