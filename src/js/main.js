@@ -68,6 +68,7 @@ function handleAddProduct(ev) {
   // 9- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
   console.log(products, ev.target.dataset.id);
   console.log('me han clickado');
+  //10- obtengo el elemento clickado
   const clickedId = ev.target.dataset.id;
   let foundProduct;
   for (const product of products) {
@@ -76,7 +77,7 @@ function handleAddProduct(ev) {
     }
   }
   console.log('Bien', foundProduct);
-
+  //11- añado el producto al carro cart
   cart.push({
     id: foundProduct.id,
     name: foundProduct.name,
@@ -84,6 +85,8 @@ function handleAddProduct(ev) {
     quantity: 1,
   });
   console.log(cart);
+  //12- pinto la cesta
+  paintCartItems();
 }
 
 getApiData();
@@ -120,16 +123,16 @@ function getCartTotalHtmlCode() {
   return htmlCode;
 }
 
-// function that paints all cartItems and calculates totalprice
+// 13 function that paints all cartItems and calculates totalprice
 // transfer items with properties to object
 
 function paintCartItems() {
   cartElement.innerHTML = '';
-  for (let index = 0; index < products.length; index++) {
-    cartElement.innerHTML += getCartItemHtmlCode(products[index]);
+  for (const item of cart) {
+    cartElement.innerHTML += getCartItemHtmlCode(item);
   }
   cartElement.innerHTML += getCartTotalHtmlCode();
-  listenCartBtns();
+  //listenCartBtns();
   // const totalPrice =
   //   product1.price * product1.quantity +
   //   product2.price * product2.quantity +
