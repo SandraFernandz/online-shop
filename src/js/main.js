@@ -70,42 +70,54 @@ function handleAddProduct(ev) {
   console.log('me han clickado');
   //10- obtengo el elemento clickado
   const clickedId = ev.target.dataset.id;
-  let foundProduct;
-  for (const product of products) {
-    if (product.id === clickedId) {
-      foundProduct = product;
+  let foundItem;
+  for (const item of cart) {
+    if (item.id === clickedId) {
+      foundItem = item;
     }
   }
-  console.log('Bien', foundProduct);
-  //11- añado el producto al carro cart
-  cart.push({
-    id: foundProduct.id,
-    name: foundProduct.name,
-    price: foundProduct.price,
-    quantity: 1,
-  });
+
+  if (foundItem === undefined) {
+    //si no está en la cesta
+    //busco el producto clickado
+    let foundProduct;
+    for (const product of products) {
+      if (product.id === clickedId) {
+        foundProduct = product;
+      }
+    }
+    console.log('Bien', foundProduct);
+    //11- añado el producto al carro cart
+    cart.push({
+      id: foundProduct.id,
+      name: foundProduct.name,
+      price: foundProduct.price,
+      quantity: 2,
+    });
+  } else {
+    // si sí está lo incremento
+    foundItem.quantity += 1;
+  }
   console.log(cart);
-  //12- pinto la cesta
+  //12- pinto la cesta cada vez que modifico el num de productos comprados
   paintCartItems();
 }
-
-getApiData();
 
 // function that generates each item´s row in shopping cart
 // converting items into objects
 
-function getCartItemHtmlCode(product) {
+function getCartItemHtmlCode(item) {
   let htmlCode = '';
   htmlCode += `<tr>`;
-  htmlCode += `<td>${product.name}</td>`;
-  htmlCode += `<td>${product.price}</td>`;
+  htmlCode += `<td>${item.name}</td>`;
+  htmlCode += `<td>${item.price}</td>`;
   htmlCode += `<td>`;
   htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
-  htmlCode += `${product.quantity}`;
+  htmlCode += `${item.quantity}`;
   htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
   htmlCode += ` </td>`;
   htmlCode += ` <td class="text-align-right">${
-    product.price * product.quantity
+    item.price * item.quantity
   }</td>`;
   htmlCode += ` </tr>`;
   return htmlCode;
@@ -118,7 +130,7 @@ function getCartTotalHtmlCode() {
   htmlCode += ` <tr class="text--bold">`;
   htmlCode += `  <td>Total</td>`;
   htmlCode += `  <td colspan="3" class="text-align-right">
-        ${getTotalPrice()}</td>`;
+        ${getTotalPrice()} €</td>`;
   htmlCode += `</tr>`;
   return htmlCode;
 }
@@ -129,68 +141,61 @@ function getCartTotalHtmlCode() {
 function paintCartItems() {
   cartElement.innerHTML = '';
   for (const item of cart) {
+    //14- para cada elemento creamos su html
     cartElement.innerHTML += getCartItemHtmlCode(item);
   }
+  //15- añadimos línea de 'total' al carro de la compra
   cartElement.innerHTML += getCartTotalHtmlCode();
   //listenCartBtns();
-  // const totalPrice =
-  //   product1.price * product1.quantity +
-  //   product2.price * product2.quantity +
-  //   product3.price * product3.quantity;
-  // const item1 = getCartItemHtmlCode(product1);
-  // const item2 = getCartItemHtmlCode(product2);
-  // const item3 = getCartItemHtmlCode(product3);
-  // const total = getCartTotalHtmlCode(totalPrice);
-  // cartElement.innerHTML = item1 + item2 + item3 + total;
-  // // after re-painting, we listen w/ addEventListener again
-  // listenCartBtns();
 }
 
 function getTotalPrice() {
   let total = 0;
-  for (const product of products) {
-    total += product.price * product.quantity;
+  for (const item of cart) {
+    total += item.price * item.quantity;
   }
   return total;
 }
+
+getApiData();
 
 //paintCartItems();
 
 // listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
 
-function handleQuantityBtn(ev) {
-  const currentTarget = ev.currentTarget;
-  if (currentTarget.classList.contains('js-inc-btn')) {
-    incQuantity(foundProduct);
-    //product1.quantity += 1;
-  } else if (currentTarget.classList.contains('js-dec-btn')) {
-    decQuantity(foundProduct);
-    //product1.quantity -= 1;
-  }
-  paintCartItems();
-}
+// function handleQuantityBtn(ev) {
+//   const currentTarget = ev.currentTarget;
+//   if (currentTarget.classList.contains('js-inc-btn')) {
+//     incQuantity(foundProduct);
+//     //product1.quantity += 1;
+//   } else if (currentTarget.classList.contains('js-dec-btn')) {
+//     decQuantity(foundProduct);
+//     //product1.quantity -= 1;
+//   }
+//   paintCartItems();
+// }
 
 // using "this" for a function being used from an object, where "this" is the object.
-// product functions
+// item functions
 
-function incQuantity(product) {
-  //this.quantity += 1;
-  product.quantity += 1;
-}
+// function incQuantity(item) {
+//   //this.quantity += 1;
+//   item.quantity += 1;
+// }
 
-function decQuantity(product) {
-  if (product.quantity > 0) {
-    product.quantity -= 1;
-  }
-}
+// function decQuantity(item) {
+//   if (item.quantity > 0) {
+//     item.quantity -= 1;
+//   }
+// }
 
-function listenCartBtns() {
-  const decBtn = document.querySelector('.js-dec-btn');
-  const incBtn = document.querySelector('.js-inc-btn');
-  incBtn.addEventListener('click', handleQuantityBtn);
-  decBtn.addEventListener('click', handleQuantityBtn);
-}
+// function listenCartBtns() {
+//   const decBtn = document.querySelector('.js-dec-btn');
+//   const incBtn = document.querySelector('.js-inc-btn');
+//   incBtn.addEventListener('click', handleQuantityBtn);
+//   decBtn.addEventListener('click', handleQuantityBtn);
+// }
 
 // creating object with form input
 
