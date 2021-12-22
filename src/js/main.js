@@ -78,7 +78,7 @@ function handleAddProduct(ev) {
   }
 
   if (foundItem === undefined) {
-    //si no está en la cesta
+    // 11- si no está en la cesta
     //busco el producto clickado
     let foundProduct;
     for (const product of products) {
@@ -92,10 +92,10 @@ function handleAddProduct(ev) {
       id: foundProduct.id,
       name: foundProduct.name,
       price: foundProduct.price,
-      quantity: 2,
+      quantity: 1,
     });
   } else {
-    // si sí está lo incremento
+    // 12- si sí está lo incremento
     foundItem.quantity += 1;
   }
   console.log(cart);
@@ -114,7 +114,7 @@ function getCartItemHtmlCode(item) {
   htmlCode += `<td>`;
   htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
   htmlCode += `${item.quantity}`;
-  htmlCode += `<button class="js-inc-btn card__btn">+</button>`;
+  htmlCode += `<button class="js-inc-btn card__btn" data-id="${item.id}">+</button>`;
   htmlCode += ` </td>`;
   htmlCode += ` <td class="text-align-right">${
     item.price * item.quantity
@@ -146,7 +146,7 @@ function paintCartItems() {
   }
   //15- añadimos línea de 'total' al carro de la compra
   cartElement.innerHTML += getCartTotalHtmlCode();
-  //listenCartBtns();
+  listenCartBtns();
 }
 
 function getTotalPrice() {
@@ -158,8 +158,7 @@ function getTotalPrice() {
 }
 
 getApiData();
-
-//paintCartItems();
+paintCartItems();
 
 // listen to button event
 // when moved, these buttons don´t work because they haven´t been painted yet??
@@ -190,12 +189,16 @@ getApiData();
 //   }
 // }
 
-// function listenCartBtns() {
-//   const decBtn = document.querySelector('.js-dec-btn');
-//   const incBtn = document.querySelector('.js-inc-btn');
-//   incBtn.addEventListener('click', handleQuantityBtn);
-//   decBtn.addEventListener('click', handleQuantityBtn);
-// }
+// 15- escuchamos botones cesta compra
+
+function listenCartBtns() {
+  //const decBtn = document.querySelector('.js-dec-btn');
+  const incBtns = document.querySelectorAll('.js-inc-btn');
+  for (const incBtn of incBtns) {
+    incBtn.addEventListener('click', handleAddProduct);
+    //decBtn.addEventListener('click', handleQuantityBtn);
+  }
+}
 
 // creating object with form input
 
