@@ -57,14 +57,14 @@ function listenAddProductsBtns() {
   const productBtns = document.querySelectorAll('.js-add-product');
 
   for (const productBtn of productBtns) {
-    productBtn.addEventListener('click', handleAddProduct);
+    productBtn.addEventListener('click', handleIncProduct);
     console.log(productBtn);
   }
 }
 
 // 6- creamos función manejadora del evento
 
-function handleAddProduct(ev) {
+function handleIncProduct(ev) {
   // 9- con ev.target.dataset accedemos a los atributos del elemento html que empiezan con data
   console.log(products, ev.target.dataset.id);
   console.log('me han clickado');
@@ -103,6 +103,27 @@ function handleAddProduct(ev) {
   paintCartItems();
 }
 
+// 17- función decrementar de shopping cart
+
+function handleDecProduct(ev) {
+  // 18- obtengo el producto de la cesta clickado
+  const clickedId = ev.target.dataset.id;
+  // 19- busco el producto clickado
+  let foundItem;
+  for (const item of cart) {
+    if (item.id === clickedId) {
+      foundItem = item;
+    }
+  }
+  // 20- compruebo si tengo más de una unidad en el producto
+  console.log(foundItem.quantity);
+  if (foundItem.quantity > 1) {
+    foundItem.quantity -= 1;
+  }
+  console.log(foundItem.quantity);
+  console.log(ev.target.dataset.id, 'me han clickado');
+}
+
 // function that generates each item´s row in shopping cart
 // converting items into objects
 
@@ -112,7 +133,7 @@ function getCartItemHtmlCode(item) {
   htmlCode += `<td>${item.name}</td>`;
   htmlCode += `<td>${item.price}</td>`;
   htmlCode += `<td>`;
-  htmlCode += `<button class="js-dec-btn card__btn">-</button>`;
+  htmlCode += `<button class="js-dec-btn card__btn" data-id="${item.id}">-</button>`;
   htmlCode += `${item.quantity}`;
   htmlCode += `<button class="js-inc-btn card__btn" data-id="${item.id}">+</button>`;
   htmlCode += ` </td>`;
@@ -192,11 +213,13 @@ paintCartItems();
 // 15- escuchamos botones cesta compra
 
 function listenCartBtns() {
-  //const decBtn = document.querySelector('.js-dec-btn');
+  const decBtns = document.querySelectorAll('.js-dec-btn');
+  for (const decBtn of decBtns) {
+    decBtn.addEventListener('click', handleDecProduct);
+  }
   const incBtns = document.querySelectorAll('.js-inc-btn');
   for (const incBtn of incBtns) {
-    incBtn.addEventListener('click', handleAddProduct);
-    //decBtn.addEventListener('click', handleQuantityBtn);
+    incBtn.addEventListener('click', handleIncProduct);
   }
 }
 
