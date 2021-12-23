@@ -122,6 +122,7 @@ function handleDecProduct(ev) {
   }
   console.log(foundItem.quantity);
   console.log(ev.target.dataset.id, 'me han clickado');
+  paintCartItems();
 }
 
 // function that generates each item´s row in shopping cart
