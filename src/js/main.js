@@ -119,6 +119,17 @@ function handleDecProduct(ev) {
   console.log(foundItem.quantity);
   if (foundItem.quantity > 1) {
     foundItem.quantity -= 1;
+  } else {
+    //  cuando sólo tengo un elemento en el shopping cart y decremento (usamos el índex para borrar ese elemento). foundIndex busca índice de el clickado
+    let foundIndex;
+    // uso for clásico para trabajar con índices
+    for (let index = 0; index < cart.length; index += 1) {
+      if (cart[index].id === clickedId) {
+        foundIndex = index;
+      }
+    }
+    // borrar el elemento que está en esa posición, índice
+    cart.splice(foundIndex, 1);
   }
   console.log(foundItem.quantity);
   console.log(ev.target.dataset.id, 'me han clickado');
