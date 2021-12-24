@@ -62,6 +62,35 @@ function listenAddProductsBtns() {
   }
 }
 
+// 21- limpiar código. creamos función contadora para hacer más corta función de inc/decrementar con botones. llamamos a estas funciones HELPERS
+
+// HELPERS
+
+function findInArray(id, arr) {
+  //let foundItem;
+  for (const item of arr) {
+    if (item.id === id) {
+      //foundItem = item;
+      return item;
+    }
+  }
+  //return foundItem;
+  return undefined;
+}
+
+// 25- Creo siguiente helper
+
+function findIndexInArray(id, arr) {
+  //let foundIndex;
+  for (let index = 0; index < arr.length; index += 1) {
+    if (arr[index].id === id) {
+      //foundIndex = index;
+      return index;
+    }
+  }
+  return undefined;
+}
+
 // 6- creamos función manejadora del evento
 
 function handleIncProduct(ev) {
@@ -70,22 +99,24 @@ function handleIncProduct(ev) {
   console.log('me han clickado');
   //10- obtengo el elemento clickado
   const clickedId = ev.target.dataset.id;
-  let foundItem;
-  for (const item of cart) {
-    if (item.id === clickedId) {
-      foundItem = item;
-    }
-  }
+  // 22- substituimos bucle for para encontrar item por función con parámetro.
+  let foundItem = findInArray(clickedId, cart);
+  // for (const item of cart) {
+  //   if (item.id === clickedId) {
+  //     foundItem = item;
+  //   }
+  // }
 
   if (foundItem === undefined) {
     // 11- si no está en la cesta
     //busco el producto clickado
-    let foundProduct;
-    for (const product of products) {
-      if (product.id === clickedId) {
-        foundProduct = product;
-      }
-    }
+    // 24- aplico función helper que busca en un array
+    let foundProduct = findInArray(clickedId, products);
+    // for (const product of products) {
+    //   if (product.id === clickedId) {
+    //     foundProduct = product;
+    //   }
+    // }
     console.log('Bien', foundProduct);
     //11- añado el producto al carro cart
     cart.push({
@@ -109,25 +140,28 @@ function handleDecProduct(ev) {
   // 18- obtengo el producto de la cesta clickado
   const clickedId = ev.target.dataset.id;
   // 19- busco el producto clickado
-  let foundItem;
-  for (const item of cart) {
-    if (item.id === clickedId) {
-      foundItem = item;
-    }
-  }
+  // 23- substituyo bucle for por función con parámetros para encontrar dentro del array
+  let foundItem = findInArray(clickedId, cart);
+  // for (const item of cart) {
+  //   if (item.id === clickedId) {
+  //     foundItem = item;
+  //   }
+  // }
   // 20- compruebo si tengo más de una unidad en el producto
   console.log(foundItem.quantity);
   if (foundItem.quantity > 1) {
     foundItem.quantity -= 1;
   } else {
     //  cuando sólo tengo un elemento en el shopping cart y decremento (usamos el índex para borrar ese elemento). foundIndex busca índice de el clickado
-    let foundIndex;
+    // 26- usamos función helper para encontrar índice en el array
+    //let foundIndex; buscar posicion del el clickado en cart
+    let foundIndex = findIndexInArray(clickedId, cart);
     // uso for clásico para trabajar con índices
-    for (let index = 0; index < cart.length; index += 1) {
-      if (cart[index].id === clickedId) {
-        foundIndex = index;
-      }
-    }
+    // for (let index = 0; index < cart.length; index += 1) {
+    //   if (cart[index].id === clickedId) {
+    //     foundIndex = index;
+    //   }
+    // }
     // borrar el elemento que está en esa posición, índice
     cart.splice(foundIndex, 1);
   }
