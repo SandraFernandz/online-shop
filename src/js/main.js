@@ -271,6 +271,18 @@ function listenCartBtns() {
     incBtn.addEventListener('click', handleIncProduct);
   }
 }
+
+// 29- leer del localStorage y comprobar si hay algo
+
+const getFromLocalStorage(){
+const localStorageCart = loclaStorage.getItem('cart');
+if(localStorageCart !== null){
+  cart= JSON.parse(localStorageCart);
+  paintCartItems();
+
+}
+}
+
 // 27- Guardar en el localStorage
 
 const setInLocalStorage = () => {
