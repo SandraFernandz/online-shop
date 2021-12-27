@@ -131,6 +131,8 @@ function handleIncProduct(ev) {
   }
   console.log(cart);
   //12- pinto la cesta cada vez que modifico el num de productos comprados
+  // 28- guardamos en localStorage cd Increm/Decrem
+  setInLocalStorage();
   paintCartItems();
 }
 
@@ -167,6 +169,7 @@ function handleDecProduct(ev) {
   }
   console.log(foundItem.quantity);
   console.log(ev.target.dataset.id, 'me han clickado');
+  setInLocalStorage();
   paintCartItems();
 }
 
@@ -268,6 +271,13 @@ function listenCartBtns() {
     incBtn.addEventListener('click', handleIncProduct);
   }
 }
+// 27- Guardar en el localStorage
+
+const setInLocalStorage = () => {
+  const stringifyCart = JSON.stringify(cart);
+  // param 1 nombre, param 2 valor que guardamos
+  localStorage.setItem('cart', stringifyCart);
+};
 
 // creating object with form input
 
