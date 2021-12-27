@@ -274,13 +274,12 @@ function listenCartBtns() {
 
 // 29- leer del localStorage y comprobar si hay algo
 
-const getFromLocalStorage(){
-const localStorageCart = loclaStorage.getItem('cart');
-if(localStorageCart !== null){
-  cart= JSON.parse(localStorageCart);
-  paintCartItems();
-
-}
+function getFromLocalStorage() {
+  const localStorageCart = localStorage.getItem('cart');
+  if (localStorageCart !== null) {
+    cart = JSON.parse(localStorageCart);
+    paintCartItems();
+  }
 }
 
 // 27- Guardar en el localStorage
@@ -290,6 +289,8 @@ const setInLocalStorage = () => {
   // param 1 nombre, param 2 valor que guardamos
   localStorage.setItem('cart', stringifyCart);
 };
+
+getFromLocalStorage();
 
 // creating object with form input
 
