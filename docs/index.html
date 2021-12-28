@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="icon" href="./assets/images/favicon.png" />
   </head>
-
   <body>
     <div class="page">
       <header class="page__header">
         <img src="./assets/images/logo-adalab.png" alt="Adalab">
         <h1>Bienvenidos a Adalab</h1>
       </header>
-
       <main class="page__main">
         <h2>Este es el starter kit de Adalab</h2>
-        <p>Lo usamos para aprender:</p>
+        <p>Este es un proyecto en curso de Sandra Fernández</p>
+        <p>Contiene:</p>
         <ul class="main__list">
           <li>Sass</li>
           <li>HTML partials</li>
@@ -45,24 +44,118 @@
         <ul class="main__list">
           <li>
             <a class="link__adalab" href="https://adalab.es">Adalab</a>
-
           </li>
           <li>
             <a class="" href="./more-info.html">Más info del starter kit</a>
-
           </li>
         </ul>
       </main>
-
       <footer class="page__footer">
         <small>
           &copy; Todos los derechos reservados
           <a class="link__adalab" href="https://adalab.es">Adalab</a>
-
         </small>
       </footer>
-
     </div>
     <script src="./assets/js/main.js"></script>
   </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carro de la compra</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="//beta.adalab.es/resources/stylesheets/all.css" />
+  <!-- <link rel="stylesheet" href="./styles/styles.css" /> -->
+</head>
+
+<body class="page col2">
+  <div>
+    <h2 class="title--medium">Listado de algunas camisetas</h2>
+
+    <section class="js-products cards">
+      <!-- <article class="card">
+        <img src="./assets/images/javascript.jpg" class="card__img" alt="Camiseta de JavaScript">
+        <h3 class="card__title">JavaScript</h3>
+        <p class="card__description">15,00 €</p>
+        <span>---</span>
+        <button class="card__btn">Añadir a la cesta</button>
+      </article> -->
+      <!-- 
+      <article class="card">
+        <img src="./assets/images/react.jpg" class="card__img" alt="Camiseta de React JS">
+        <h3 class="card__title">React JS</h3>
+        <p class="card__description">13,00 €</p>
+        <span>---</span>
+        <button class="card__btn">Añadir a la cesta</button>
+      </article> -->
+
+    </section>
+  </div>
+
+  <div>
+    <h2 class="title--medium">Cesta de la compra</h2>
+
+    <table class="table">
+      <thead>
+        <tr class="text--bold">
+          <td>Producto</td>
+          <td>Precio</td>
+          <td>Unidades</td>
+          <td class="text-align-right">Total</td>
+        </tr>
+      </thead>
+      <tbody class="js-cart">
+        <!-- <tr>
+          <td>JavaScript</td>
+          <td>15,00</td>
+          <td>
+            <button class="card__btn">-</button>
+            2
+            <button class="card__btn">+</button>
+          </td>
+          <td class="text-align-right">30,00€</td>
+        </tr>
+        <tr>
+          <td>Node JS</td>
+          <td>12,00</td>
+          <td>
+            <button class="card__btn">-</button>
+            3
+            <button class="card__btn">+</button>
+          </td>
+          <td class="text-align-right">36,00€</td>
+        </tr>
+        <tr class="text--bold">
+          <td>Total</td>
+          <td colspan="3" class="text-align-right">66,00€</td>
+        </tr> -->
+      </tbody>
+    </table>
+    <form action="" class="mt-1">
+      <h2 class="title--medium">Dónde te lo enviamos</h2>
+      <div>
+        <label class="form__label" for="address">Dirección</label>
+        <input class="js-address form__input-text" type="text" name="address" id="address">
+      </div>
+      <div>
+        <label class="form__label" for="city">Ciudad</label>
+        <input class="js-city form__input-text" type="text" name="city" id="city" foo="123">
+      </div>
+      <div>
+        <label class="form__label" for="zip">Código postal</label>
+        <input class="js-zip form__input-text" type="text" name="zip" id="zip">
+      </div>
+    </form>
+    <p class="js-address-info mt-1"></p>
+  </div>
+
+  <script src="./assets/js/main.js"></script>
+
+  <!-- <script src="./js/main.js"></script> -->
+</body>
+
 </html>
